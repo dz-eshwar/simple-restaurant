@@ -1,18 +1,21 @@
 package com.britr.simpleRestaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_details")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDetail {
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -38,7 +41,7 @@ public class OrderDetail {
     private UserDetail user;
 
     @Column(name = "created_date")
-    private Instant createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "order_status", length = 45)
     private String orderStatus;
@@ -47,7 +50,30 @@ public class OrderDetail {
     private String deleteStatus;
 
     @Column(name = "delete_date")
-    private Instant deleteDate;
+    private LocalDateTime deleteDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private OrderTrans order;
+
+    @Column(name = "prep_time")
+    private Integer prepTime;
+
+    public Integer getPrepTime() {
+        return prepTime;
+    }
+
+    public void setPrepTime(Integer prepTime) {
+        this.prepTime = prepTime;
+    }
+
+    public OrderTrans getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderTrans order) {
+        this.order = order;
+    }
 
     public Integer getId() {
         return id;
@@ -97,11 +123,11 @@ public class OrderDetail {
         this.user = user;
     }
 
-    public Instant getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Instant createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -121,11 +147,11 @@ public class OrderDetail {
         this.deleteStatus = deleteStatus;
     }
 
-    public Instant getDeleteDate() {
+    public LocalDateTime getDeleteDate() {
         return deleteDate;
     }
 
-    public void setDeleteDate(Instant deleteDate) {
+    public void setDeleteDate(LocalDateTime deleteDate) {
         this.deleteDate = deleteDate;
     }
 
