@@ -35,7 +35,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        System.out.println("filter is working");
         String header = fetchHeader(request);
         System.out.println(header);
         if(StringUtils.isBlank(header)||!header.startsWith(SimpleRestaurantConstants.BEARER_STRING)){
@@ -67,7 +66,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     public String fetchHeader(HttpServletRequest request){
-        System.out.println(request.getHeader(SimpleRestaurantConstants.HEADER_STRING));
         if(StringUtils.isNotBlank(request.getHeader(SimpleRestaurantConstants.HEADER_STRING))){
             return request.getHeader(SimpleRestaurantConstants.HEADER_STRING);
         }

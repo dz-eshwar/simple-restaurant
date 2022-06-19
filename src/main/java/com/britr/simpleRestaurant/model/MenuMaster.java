@@ -1,17 +1,22 @@
 package com.britr.simpleRestaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "menu_mst")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuMaster {
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class MenuMaster implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -30,6 +35,28 @@ public class MenuMaster {
 
     @Column(name = "prep_time")
     private Integer prepTime;
+
+    @Column(name = "createdDateTime")
+    private LocalDateTime createdDateTime;
+
+    @Column(name = "price")
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
 
     public Integer getId() {
         return id;

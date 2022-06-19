@@ -1,17 +1,20 @@
 package com.britr.simpleRestaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "food_type")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodType {
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+public class FoodType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
