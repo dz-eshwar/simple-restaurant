@@ -9,7 +9,8 @@ IntellijIdea
 Maven - latest version
 postman rest client
 
-Please note screenshots of sample request and response for each api is in /sample screenshots folder
+Please note screenshots of sample request and response for each api is in /sample screenshots folder.
+The application uses JWT token based authorization to restrict access of API's
 
 To build this application,please go to the project folder in command prompt and run the follwoing commands.
 (**refer to https://metamug.com/article/java/build-run-java-maven-project-command-line.html for further info on maven commands)
